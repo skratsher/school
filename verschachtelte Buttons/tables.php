@@ -24,11 +24,27 @@ if (!$conn) {
 			$sql = "SHOW TABLES FROM bibliothek";
 			$showtables= mysqli_query($conn, $sql);
 			
-			while($row = mysqli_fetch_assoc($result)) {
+//			while($row = mysqli_fetch_assoc($result)) {
 				
-			}
-			
+//			}
 
+
+/*while($table = mysql_fetch_array($showtables)) { // go through each row that was returned in $result
+    echo($table[0] . "<BR>");    // print the table that was returned on that row.
+}*/
+			
+if($stmt = $conn->query("SHOW TABLES FROM $dbname")){
+  //echo "No of records : ".$stmt->num_rows."<br>";
+  while ($row = $stmt->fetch_assoc()) {
+	//echo $row['Database']."<br>".;
+	echo "<tr>";
+		echo "	<td>" . $row["Tables_in_bibliothek"] . "</td>";
+		echo "	<td><button type=\"submit\" name=\"databasename\" value=\"" . $row["Tables_in_bibliothek"] . "\">Details</button></td>";
+		echo "</tr>";
+  }
+}else{
+echo $connection->error;
+}
 
 			
 		?>
